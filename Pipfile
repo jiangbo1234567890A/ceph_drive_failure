@@ -26,6 +26,10 @@ distributed = "*"
 dask-ml = "*"
 dask-xgboost = "*"
 mlflow = "*"
+fbprophet = "*"
+tqdm = "*"
+statsmodels = "*"
+ipykernel = "*"
 
 [requires]
 python_version = "3.6"
