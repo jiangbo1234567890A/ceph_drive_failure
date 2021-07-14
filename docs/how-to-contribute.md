@@ -1,20 +1,19 @@
-# Contribute to the AI for Continuous Integration Project
+# Contribute to the Ceph Hard Drive Failure Prediction Project
 
-To get started with familiarizing yourself with the AI for Continuous Integration (AI4CI) project, check how to [Get Started](get-started.md).
+To get started with familiarizing yourself with the project, please check our docs on how to [Get Started](get-started.md).
 
-## Contribute to a KPI Metric
+## Contribute Domain Knowledge
 
-In order to quantify and evaluate the current state of the CI workflow, we have started to establish and collect the relevant metrics and key performance indicators (KPIs) needed to measure them. We have a list of [metrics](https://www.operate-first.cloud/data-science/ocp-ci-analysis/notebooks/data-sources/TestGrid/metrics/README.md) that we currently collect. We encourage contributions to this work of developing additional KPIs and metrics.
+Machine learning models are GIGO - garbage in garbage out. That is, they are only as good as the data they are built on. As data scientists, we rely heavily on storage system SMEs to provide domain knowledge about what pieces of data can be powerful indicators of failure. For any feedback you want to provide as an SME, you can open an issue on the project repo, and prefix the issue title with `SME Feedback:`
 
-- In order to include an additional KPI, you can open a KPI Request [issue](https://github.com/aicoe-aiops/ocp-ci-analysis/issues). Specify the KPI you wish to collect with the prefix `KPI Request:`.
-- In order to add a notebook to fulfill one of the existing open `KPI Request:` issues, you can use the [KPI template notebook](notebooks/data-sources/TestGrid/metrics/metric_template.ipynb). The template notebook has helper functions and examples to make contributing new metrics as simple and as uniform as possible.
-- Submit a Pull Request to the [project repo](https://github.com/aicoe-aiops/ocp-ci-analysis) with your KPI analysis notebook.
-- In order to add the notebook to the automated Kubeflow workflow, follow intructions in the [guide](automating-using-elyra.md).
+## Contribute to ML Analysis
 
-## Contribute to an ML Analysis
+Currently, we have several ML sub-projects/workstreams in progress. The main ones are as follows:
 
-With the necceary KPIs available to quantify and evaluate the CI workflow, we can start to apply some AI and machine learning techniques to help improve the CI workflow. We encourage you to contribute to this work developing additional machine learning analyses or adding features to the existing analyses.
+- Hard Drive Failure Prediction
+- SMART Metric Forecasting - Issues #11, #14, #15, #17, #18
+- Exploring Ceph Telemetry Dataset - Issues #29, #32, #33
+- Exploring FAST Dataset - Issues #43, #44, #45
+- Disk Health Analytics Module - Issues #27, #28
 
-- In order to include an additional ML Analysis, you can open an ML Request [issue](https://github.com/aicoe-aiops/ocp-ci-analysis/issues). Specify the machine learning application you would like to have included with the prefix `ML Request:`.
-- Submit a Pull Request to the [project repo](https://github.com/aicoe-aiops/ocp-ci-analysis) with your ML analysis notebook.
-- In order to add the notebook to the automated Kubeflow workflow, follow intructions in the [guide](automating-using-elyra.md).
+To learn more about these ML workstreams, please check out the linked issues or the [content](content.md) docs. If you wish to work on any of these workstreams, please leave a comment on the respective issue or create an issue if one doesn't exist. Once you have been assigned to the issue, you can work on it and submit a Pull Request to the [project repo](https://github.com/aicoe-aiops/ceph_drive_failure).
