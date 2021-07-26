@@ -1,4 +1,5 @@
-# Ceph Drive Failure Prediction
+# Ceph Hard Drive Failure Prediction
+*A comprehensive machine learning solution for predicting if a hard disk will fail within a given time window*
 
 ## Overview
 More than [2500 petabytes](https://www.domo.com/learn/data-never-sleeps-5?aid=ogsm072517_1&sf100871281=1) of data is generated every day by sources such as social media, IoT, commercial services, etc. Of this, a sizeable chunk is persisted in storage systems (HDDs and SSDs). To ensure that data is not lost or corrupted, large scale storage solutions often used erasure-coding or mirroring. However, these techniques become more difficult and/or expensive to deal with at scale.
