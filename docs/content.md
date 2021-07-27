@@ -13,7 +13,7 @@ This project consists of the following main workstreams:
 - [Alternate Dataset Explorations](#alternate-dataset-explorations)
     - [Ceph Telemetry Dataset](#Ceph-Telemetry-Dataset)
     - [FAST Dataset](#FAST-Dataset)
-- [Disk Health Analytics Package](#disk-health-analytics-package)
+- [Disk Health Predictor Library](#disk-health-predictor-library)
 
 
 # Hard Drive Failure Prediction
@@ -78,6 +78,6 @@ Recent [research](http://codegreen.cs.wayne.edu/wizard/#Publication) suggests th
 - Exploratory notebook (forthcoming)
 
 
-# Disk Health Analytics Package
+# Disk Health Predictor Library
 
-package all models into a python module. make available for use by everyone. decouple ceph and ML code.
+The goal of this workstream is to create an open source python module containing the models trained in this project. The goal is to make these models easily accessible and usable by everyone, not just Ceph users. This way, anyone can run inference on their own storage system using the models built in this project.
