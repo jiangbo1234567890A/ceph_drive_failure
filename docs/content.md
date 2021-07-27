@@ -10,6 +10,20 @@
 - [Alternate Dataset Explorations](#alternate-dataset-explorations)
 - [Disk Health Analytics Package](#disk-health-analytics-package)
 
+<!-- ---
+
+## Objective
+The goal is to create predictive models using the Backblaze dataset to determine when a hard drive will fail. Ideally, the model should be able to predict the health of a hard drive in terms of "good" (>6 weeks till failure), "warning" (2-6 weeks till failure), and "bad" (<2 weeks till failure). This setup is similar to [DiskProphet](https://www.prophetstor.com/diskprophet/), a disk health prediction solution from ProphetStor.
+
+At inference time, 6 days of SMART data (6 rows from the Backblaze dataset) will be available to feed to this multiclass classification model. How the model makes use of this is a design choice. It may predict on all 6 individually, or generate features using multiple days data, or use only the last day data, etc. For details on how this model would be integrated into Ceph (API, preprocessing at inference time, etc) see [this](https://github.com/ceph/ceph/tree/master/src/pybind/mgr/diskprediction_local).
+
+**NOTE:** Although the end goal is a multiclass classifier, building a binary classifier ("no fail"/"fail") could be a good starting point in understanding the problem and setup. Additionally, data exploration and insightful analysis could also be useful. These would be welcome contributions to this project as well.
+
+
+## Dataset
+The Backblaze Hard Drive dataset will be used for this project. This dataset consists of daily snapshots of basic information, SMART metrics, and status (failure label) for the hard drives in the Backblaze data center. Details about this dataset can be found [here](https://www.backblaze.com/b2/hard-drive-test-data.html). To learn more about the SMART system and SMART metrics, see [this](https://en.wikipedia.org/wiki/S.M.A.R.T.) Wikipedia article.
+
+--- -->
 
 # Hard Drive Failure Prediction
 
