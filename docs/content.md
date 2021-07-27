@@ -63,15 +63,17 @@ In this subsequent setup, we take into account the interactions between various 
 
 # Alternate Dataset Explorations
 
+Most of the work done in this project is based on the Backblaze dataset since it was the only large, publicly available, and well-curated dataset at the time. However, since this data is collected from just one company with a specific usage (backup), it might not be able to capture the various usage patterns of real Ceph users. Fortunately, there have been other recent efforts in academia and industry towards collecting more detailed disk health data, that help create better disk failure prediction models. Of these data sources, we investigate the following two in this workstream.
+
 ## Ceph Telemetry Dataset
 
-The failure prediction models created in this project are based on the open source Backblaze dataset. However, since this data is collected from just one company with a specific usage (backup), it might not be able to capture the various usage patterns of real ceph users. Therefore, the ceph team has been collecting anonymized SMART metrics from their users. We have worked with them to make this data publicly available here. Under this workstream, we explore this data and determine the best path forward for training models on it.
-
-- Exploratory notebook
+The Ceph team has been collecting anonymized SMART metrics from their users. We have worked with them to make this data publicly available. Furthermore, we have created an exploratory notebook that walks you through accessing this data, highlights the main features of this data, and compares it with the Backblaze dataset.
+* [Ceph Telemetry Data](https://kzn-swift.massopen.cloud/swift/v1/devicehealth/)
+* [Walkthrough notebook](../notebooks/data_sources/telemetry/step0_EDA.ipynb)
 
 ## FAST Dataset
 
-According to some recent research, using performance data in addition to SMART data can help improve failure prediction models.
+Recent [research](http://codegreen.cs.wayne.edu/wizard/#Publication) suggests that incorporating disk performance and disk location data with SMART metrics can be valuable in analyzing disk health. Specifically, [this](https://www.usenix.org/conference/fast20/presentation/lu) paper claims to achieve improvements in disk failure prediction models, when using these additional features. In this effort, we explore the FAST dataset and evaluate the tradeoffs between model performance gain and overhead of collecting additional metrics from users.
 
 - Exploratory notebook (forthcoming)
 
