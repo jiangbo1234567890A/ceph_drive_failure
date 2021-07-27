@@ -9,7 +9,7 @@ This project consists of the following main workstreams:
     - [End-To-End Pipeline](#End-To-End-Pipeline)
 - [SMART Metric Forecasting](#smart-metric-forecasting)
     - [Univariate Models](#Univariate-Models)
-    - [Mulitvariate Models](#Mulitvariate-Models)
+    - [Multivariate Models](#Multivariate-Models)
 - [Alternate Dataset Explorations](#alternate-dataset-explorations)
     - [Ceph Telemetry Dataset](#Ceph-Telemetry-Dataset)
     - [FAST Dataset](#FAST-Dataset)
