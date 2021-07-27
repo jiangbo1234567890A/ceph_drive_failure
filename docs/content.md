@@ -45,15 +45,21 @@ The following notebooks were created as a part of this workstream:
 * [`kaggle_seagate_end2end`](../notebooks/data_sources/backblaze/kaggle_seagate_end2end.ipynb): Entire ML pipeline, starting from data cleaning to feature engineering to model training, for seagate disks. Combines the results from each notebook in the above sections.
 * [`kaggle_hgst_end2end`](../notebooks/data_sources/backblaze/kaggle_hgst_end2end.ipynb.ipynb): Entire ML pipeline, starting from data cleaning to feature engineering to model training, for hgst disks. Combines the results from each notebook in the above sections.
 
+
 # SMART Metric Forecasting
 
-The goal of this workstream is to create forecasting models, that can predict the future values of individual SMART metrics. The idea is that the storage system operator/SME can manually decide whether or not to remove a disk based on their unique failure tolerance level.
+The goal of this workstream is to create models that can forecast the values of individual SMART metrics into the near future. The idea here is that these forecasting models could be used in tandem with the disk health classifier models from above. Together, they can provide a more granular and detailed insight into what specific component is likely to fail for a given disk. Based on this information, the storage system operator or subject matter expert can manually decide whether or not to remove a hard disk drive from the storage cluster or datacenter, based on their unique failure tolerance level.
 
 ## Univariate Models
-First, we deal with only one SMART metric
+In this initial setup, we treat each SMART metric as an independent variable to forecast. That is, we train univariate forecasting models for each (significant) SMART metric.
+
+* [Notebook](../notebooks/experimental/forecast_smart_metrics.ipynb)
 
 ## Multivariate Models
-Next, we take into consideration multiple SMART metrics
+In this subsequent setup, we take into account the interactions between various SMART metrics. That is, we train multivariate forecasting models to predict how all the SMART metric values will change together in the near future.
+
+* [Notebook](../notebooks/experimental/multivariate_forecast_smart_metrics.ipynb)
+
 
 # Alternate Dataset Explorations
 
@@ -67,7 +73,8 @@ The failure prediction models created in this project are based on the open sour
 
 According to some recent research, using performance data in addition to SMART data can help improve failure prediction models.
 
-- Exploratory notebook
+- Exploratory notebook (forthcoming)
+
 
 # Disk Health Analytics Package
 
