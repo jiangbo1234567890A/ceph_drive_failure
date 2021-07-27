@@ -1,61 +1,59 @@
 # Table of Contents
+
+This project consists of the following main workstreams:
+
 - [Hard Drive Failure Prediction](#hard-drive-failure-prediction)
-    - Backblaze dataset
-    - Ceph telemetry dataset
-    - FAST dataset
+    - [Data Exploration](#Data-Exploration)
+    - [Data Cleaning](#Data-Cleaning)
+    - [Model Training](#Model-Training)
+    - [End-To-End Pipeline](#End-To-End-Pipeline)
 - [SMART Metric Forecasting](#smart-metric-forecasting)
-    - Backblaze dataset
-    - Ceph telemetry dataset
-    - FAST dataset
+    - [Univariate Models](#Univariate-Models)
+    - [Mulitvariate Models](#Mulitvariate-Models)
 - [Alternate Dataset Explorations](#alternate-dataset-explorations)
+    - [Ceph Telemetry Dataset](#Ceph-Telemetry-Dataset)
+    - [FAST Dataset](#FAST-Dataset)
 - [Disk Health Analytics Package](#disk-health-analytics-package)
 
-<!-- ---
-
-## Objective
-The goal is to create predictive models using the Backblaze dataset to determine when a hard drive will fail. Ideally, the model should be able to predict the health of a hard drive in terms of "good" (>6 weeks till failure), "warning" (2-6 weeks till failure), and "bad" (<2 weeks till failure). This setup is similar to [DiskProphet](https://www.prophetstor.com/diskprophet/), a disk health prediction solution from ProphetStor.
-
-At inference time, 6 days of SMART data (6 rows from the Backblaze dataset) will be available to feed to this multiclass classification model. How the model makes use of this is a design choice. It may predict on all 6 individually, or generate features using multiple days data, or use only the last day data, etc. For details on how this model would be integrated into Ceph (API, preprocessing at inference time, etc) see [this](https://github.com/ceph/ceph/tree/master/src/pybind/mgr/diskprediction_local).
-
-**NOTE:** Although the end goal is a multiclass classifier, building a binary classifier ("no fail"/"fail") could be a good starting point in understanding the problem and setup. Additionally, data exploration and insightful analysis could also be useful. These would be welcome contributions to this project as well.
-
-
-## Dataset
-The Backblaze Hard Drive dataset will be used for this project. This dataset consists of daily snapshots of basic information, SMART metrics, and status (failure label) for the hard drives in the Backblaze data center. Details about this dataset can be found [here](https://www.backblaze.com/b2/hard-drive-test-data.html). To learn more about the SMART system and SMART metrics, see [this](https://en.wikipedia.org/wiki/S.M.A.R.T.) Wikipedia article.
-
---- -->
 
 # Hard Drive Failure Prediction
 
-## Backblaze Dataset
-In this workstream, we used the backblaze data to train failure prediction models. The notebooks for this workstream are as follows:
+In this workstream, we address the primary objective of the project i.e. creating disk failure prediction models using open source datasets. Specifically, we train classification models to classify a given disk's health into one of three categories - `good` (>6 weeks till failure), `warning` (2-6 weeks till failure), and `bad` (<2 weeks till failure). These disk health categories were defined this way to be consistent with the [existing setup in Ceph](https://github.com/ceph/ceph/blob/f8f7b865715987139d96e4baf41c82329dc19108/src/pybind/mgr/diskprediction_local/module.py#L271) provided by [DiskProphet](https://www.prophetstor.com/diskprophet/), a disk health prediction solution from ProphetStor. The input for these models is 6 days of [SMART](https://en.wikipedia.org/wiki/S.M.A.R.T.) data, which was also a design choice made to be compatible with the [existing setup](https://github.com/ceph/ceph/blob/f8f7b865715987139d96e4baf41c82329dc19108/src/pybind/mgr/diskprediction_local/module.py#L151).
 
-- Data Understanding - what does the backblaze data look like, how to convert to and
-from raw smartctl output
-- Data Cleaning - deal with missing and incoherent data
-- Feature Extraction and Model Training - create models
-- Survival Analysis - experimental
-- Clustering - experimental
+The data used for training the models is the [Backblaze](https://www.backblaze.com/b2/hard-drive-test-data.html) dataset. It consists of SMART data collected daily from the hard disk drives in the Backblaze datacenter, along with a label indicating whether or not the drive was considered failed.
 
-## Ceph Telemetry Dataset
-- forthcoming
+The following notebooks were created as a part of this workstream:
 
-## FAST Dataset
-- forthcoming
+## Data Exploration
+
+* [`smartctl_json_db_format_finder`](../notebooks/data_sources/backblaze/step0_smartctl_json_db_format_finder.ipynb): Understand the structure of json outpu by the `smartctl` tool.
+* [`smartctl_json_db_to_df`](../notebooks/data_sources/backblaze/step0_smartctl_json_db_to_df.ipynb): Convert a nested `smartctl` json to a pandas dataframe.
+* [`data_explorer`](../notebooks/data_sources/backblaze/step1_data_explorer.ipynb): Explore the contents and salient properties of the Backblaze dataset.
+
+## Data Cleaning:
+
+* [`data_cleaner_seagate`](../notebooks/data_sources/backblaze/step2a_data_cleaner_seagate.ipynb): Clean data available for seagate disks.
+* [`data_cleaner_hgst`](../notebooks/data_sources/backblaze/step2b_data_cleaner_hgst.ipynb): Clean data available for hgst disks.
+
+## Model Training:
+
+* [`clustering_and_binaryclf`](../notebooks/data_sources/backblaze/step3a_clustering_and_binaryclf.ipynb): Explore clustering models and binary pass/fail classifiers.
+* [`ternary_clf`](../notebooks/data_sources/backblaze/step3b_ternary_clf.ipynb): Explore ternary classifiers, i.e. models that classify disk health into "good", "warning", and "bad" as described above.
+
+## End-To-End Pipeline:
+
+* [`kaggle_seagate_end2end`](../notebooks/data_sources/backblaze/kaggle_seagate_end2end.ipynb): Entire ML pipeline, starting from data cleaning to feature engineering to model training, for seagate disks. Combines the results from each notebook in the above sections.
+* [`kaggle_hgst_end2end`](../notebooks/data_sources/backblaze/kaggle_hgst_end2end.ipynb.ipynb): Entire ML pipeline, starting from data cleaning to feature engineering to model training, for hgst disks. Combines the results from each notebook in the above sections.
 
 # SMART Metric Forecasting
 
 The goal of this workstream is to create forecasting models, that can predict the future values of individual SMART metrics. The idea is that the storage system operator/SME can manually decide whether or not to remove a disk based on their unique failure tolerance level.
 
-## Backblaze Dataset
-- Univariate Forecasting
-- Multivariate Forecasting
+## Univariate Models
+First, we deal with only one SMART metric
 
-## Ceph Telemetry Dataset
-- forthcoming
-
-## FAST Dataset
-- forthcoming
+## Multivariate Models
+Next, we take into consideration multiple SMART metrics
 
 # Alternate Dataset Explorations
 
